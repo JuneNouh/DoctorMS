@@ -103,33 +103,23 @@
                                 <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}" placeholder="address">
                                 @error('address')
                                 <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                                <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
 
                             </div>
                         </div>
 
                         <div class="row mt-4">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="">Specialist</label>
-                                    <select name="department" class="form-control">
-                                        <option value="">Please select</option>
+                            <div class="col-lg-6">
+                                <label for="">Address</label>
+                                <input type="text" name="department" class="form-control @error('address') is-invalid @enderror" value="{{ old('department') }}" placeholder="department">
+                                @error('department')
+                                <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
 
-                                        @foreach (App\Models\User::all() as $d)
-                                            <option value="{{$d->department}}">{{$d->department}}</option>
-                                        @endforeach
-                                    </select>
-
-
-                                    @error('department')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-
-                                </div>
                             </div>
                             <div class="col-lg-6">
                                 <label for="">Phone Number</label>
