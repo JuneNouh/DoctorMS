@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Auth;
 class DoctorController extends Controller
 {
     /**
@@ -15,7 +16,9 @@ class DoctorController extends Controller
     {
 
         $users  = User::where('role_id','!=',3)->get();
-        return view('admin.doctor.index',compact('users'));
+        return view('admin.doctor.index', compact('users'));
+
+
     }
 
     /**
@@ -38,16 +41,15 @@ class DoctorController extends Controller
     {
         $this->validateStore($request);
         $data = $request->all();
-        $name = (new User)->userAvatar($request);
+        $image = $request->file('image');
+        $name = $image->hashName();
+        $destination = public_path('/images/doctor');
+        $image->move($destination, $name);
 
         $data['image'] = $name;
-        $data['password'] = bcrypt($request->password);
+        $data['password'] = bcrypt($data['password']);
         User::create($data);
-
-        return redirect()->back()->with('message','Doctor added');
-
-
-
+        return redirect()->back()->with('message', 'Doctor Created');
     }
 
     /**
@@ -71,7 +73,8 @@ class DoctorController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('admin.doctor.edit',compact('user'));
+
+        return view('admin.doctor.edit', compact('user'));
     }
 
     /**
@@ -117,28 +120,30 @@ class DoctorController extends Controller
         $user = User::find($id);
         $userDelete = $user->delete();
         if($userDelete){
-            unlink(public_path('images/'.$user->image));
+            unlink(public_path('/images/doctor/' . $user->image));
+            return redirect()->route('doctor.index')->with('message', 'Doctor Deleted');
         }
-        return redirect()->route('doctor.index')->with('message','Doctor deleted successfully');
 
     }
 
-    public function validateStore($request){
-        return  $this->validate($request,[
-            'name'=>'required',
-            'email'=>'required|unique:users',
-            'password'=>'required|min:6|max:25',
-            'gender'=>'required',
-            'education'=>'required',
-            'address'=>'required',
-            'department'=>'required',
-            'phone_number'=>'required|numeric',
-            'image'=>'required|mimes:jpeg,jpg,png',
-            'role_id'=>'required',
-            'description'=>'required'
+    public function validateStore(Request $request)
+    {
+        return $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|unique:users',
+            'password' => 'required|min:6|max:25',
+            'gender' => 'required',
+            'education' => 'required',
+            'address' => 'required',
+            'department' => 'required',
+            'phone_number' => 'required|numeric',
+            'image' => 'required|mimes:jpeg,jpg,png',
+            'role_id' => 'required',
+            'description' => 'required',
 
         ]);
     }
+
     public function validateUpdate($request,$id){
         return  $this->validate($request,[
             'name'=>'required',
@@ -153,10 +158,6 @@ class DoctorController extends Controller
             'role_id'=>'required',
             'description'=>'required'
 
-        ]);
+       ]);
     }
-
-
-
-
 }
