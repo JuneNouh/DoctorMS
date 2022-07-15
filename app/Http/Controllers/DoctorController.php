@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Auth;
+use Auth;
 class DoctorController extends Controller
 {
     /**
@@ -14,7 +14,7 @@ class DoctorController extends Controller
      */
     public function index()
     {
-
+        (\Auth::user()->role->name);
         $users  = User::where('role_id','!=',3)->get();
         return view('admin.doctor.index', compact('users'));
 
