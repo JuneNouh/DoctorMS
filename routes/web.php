@@ -26,4 +26,10 @@ Route::get('/dashboard', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['middleware' => ['auth','admin']], function(){
 Route::resource('doctor', App\Http\Controllers\DoctorController::class);
+});
+
+Route::resource('appointment', App\Http\Controllers\AppointmentController::class);
+
