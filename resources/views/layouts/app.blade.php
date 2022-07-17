@@ -12,9 +12,17 @@
     <!-- Scripts -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <script src="{{ mix('js/app.js') }}" defer></script>
+    <!-- datepicker -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('template/dist/css/theme.min.css')}}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
     <!-- Styles -->
 </head>
@@ -78,5 +86,23 @@
             @yield('content')
         </main>
     </div>
+    <script>
+        $( function() {
+            $( "#datepicker" ).datepicker(
+                {
+                    dateFormat: 'yy-mm-dd',
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: '-100:+0',
+                    showButtonPanel: true,
+                    weekHeader: 'Wk',
+                    dateFormat: 'yy-mm-dd',
+                    firstDay: 0,
+                    isRTL: false,
+                    showMonthAfterYear: true,
+                }
+            );
+        } );
+    </script>
 </body>
 </html>
