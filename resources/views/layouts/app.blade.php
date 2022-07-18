@@ -45,6 +45,11 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+                        @if(auth()->check()&& auth()->user()->role->name === 'patient')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('my.booking') }}">{{ __('My booking') }}</a>
+                        </li>
+                        @endif
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -91,6 +96,8 @@
             $( "#datepicker" ).datepicker(
                 {
                     dateFormat: 'yy-mm-dd',
+                    minDate: 0,
+                    numberOfMonths: 2,
                     changeMonth: true,
                     changeYear: true,
                     yearRange: '-100:+0',
@@ -104,5 +111,37 @@
             );
         } );
     </script>
+    <style type="text/css">
+    .ui-datepicker-calendar {
+        background: aliceblue;
+    }
+    .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    border: 1px solid #dad55e;
+    background: #2770a1;
+    color: #fffffc;
+}
+
+       label.btn {
+            padding: 0;
+            margin: 3px;
+        }
+        label.btn input {
+            position: absolute;
+            opacity: 0;
+        }
+        label.btn span {
+            text-align: center;
+            padding: 6px 12px;
+            display: block;
+            min-width: 80px;
+            letter-spacing: 1.2px;
+        }
+        label.btn input:checked + span {
+            background-color: #3858a8;
+            color: #fff;
+        }
+
+
+    </style>
 </body>
 </html>

@@ -17,30 +17,30 @@
                     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
                     proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
                 <div class="mt-5">
-                    <button class="btn btn-success">Register as Patient</button>
-                    <button class="btn btn-secondary">Login</button>
+                    <a href="{{url('register')}}" class="btn btn-success">Register as Patient</a>
+                    <a href="{{url('login')}}" class="btn btn-secondary">Login</a>
                 </div>
             </div>
 
         </div>
         <hr>
-        <section class="">
-            <div class="card">
-                <div class="card-header">Find Doctors</div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-8">
-                            <input type="date" class="form-control " id="datepicker"  name="date" autocomplete="off">
-                        </div>
-                        <div class="col-sm-4">
-                            <button class="btn btn-primary">Find doctors</button>
-                        </div>
+        <section>
+            <form action="{{url('/')}}" method="GET">
+                <div class="card">
+                    <div class="card-header">Find Doctors</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control " id="datepicker"  name="date" autocomplete="off">
+                            </div>
+                            <div class="col-sm-4">
+                                <button class="btn btn-primary">Find doctors</button>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
-
-            </div>
-
+            </form>
             <div class="card mt-1">
                 <div class="card-body">
 
@@ -49,15 +49,16 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Photo</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Category</th>
+                            <th scope="col">Doctor name</th>
+                            <th scope="col">Expertise</th>
+                            <th scope="col">Book</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
                             @forelse($doctors as $doctor)
                             <tr>
-                                <th scope="row">1</th>
+                                <th scope="row">{{ $loop->iteration }}</th>
                                 <td>
                                     <img src="{{asset('images')}}/{{$doctor->doctor->image}}" width="100px" style="border-radius: 50%;">
                                 </td>
@@ -72,7 +73,9 @@
                                 </td>
                             </tr>
                             @empty
-                            <td>No doctors available today</td>
+                            <div class="alert alert-danger" role="alert">
+                                No doctors available today 
+                              </div>
                             @endforelse 
                         </tbody>
                     </table>

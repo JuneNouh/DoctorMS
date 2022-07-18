@@ -166,12 +166,6 @@
                             <td><input type="checkbox" name="time[]" value="6.40pm"> 6.40 PM </td>
                         </tr>
                         <tr>
-                            <th scope="row">13</th>
-                            <td><input type="checkbox" name="time[]"  value="6pm"> 6 PM </td>
-                            <td><input type="checkbox" name="time[]"  value="6.20pm"> 6.20 PM </td>
-                            <td><input type="checkbox" name="time[]" value="6.40pm"> 6.40 PM </td>
-                        </tr>
-                        <tr>
                             <th scope="row">14</th>
                             <td><input type="checkbox" name="time[]"  value="7pm"> 7 PM </td>
                             <td><input type="checkbox" name="time[]"  value="7.20pm"> 7.20 PM </td>
